@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View } from 'react-native';
-import { Menu } from "./Menu";
-import { Shop } from "./Shop/Shop";
-import Drawer from "react-native-drawer";
+import Menu from './Menu';
+import Shop from './Shop/Shop';
+import Drawer from 'react-native-drawer';
 
 export default class Main extends Component {
   goToAuthentication() {
@@ -29,12 +29,15 @@ export default class Main extends Component {
   };
 
   render() {
+    const { navigator } = this.props;
     return (
-      <Drawer 
-        ref={ref => (this.drawer = ref)} 
-        content={<View style={{flex:1}}></View>}
+      <Drawer
+        tapToClose
+        openDrawerOffset={0.4}
+        ref={(ref) => { this.drawer = ref; }}
+        content={<Menu navigator={navigator} />}
       >
-        <View style={{flex:1}}></View>
+        <Shop open={this.openControlPanel.bind(this)} />
       </Drawer>
     );
   }

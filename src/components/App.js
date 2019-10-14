@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Navigator } from 'react-native';
+import { Navigator } from 'react-native';
 import Authentication from './Authentication/Authentication';
 import ChangeInfo from './ChangeInfo/ChangeInfo';
 import Main from './Main/Main';
@@ -19,7 +19,8 @@ export default class App extends Component {
                     }
                 }}
                 configureScene={route => {
-                    if (route.name === 'AUTHENTICATION') return Navigator.SceneConfigs.FloatFromRight;
+                    if (route.name === 'AUTHENTICATION') 
+                    { return Navigator.SceneConfigs.FloatFromRight; }
                     return Navigator.SceneConfigs.FloatFromLeft;
                 }}
             />
