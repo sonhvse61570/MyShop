@@ -20,13 +20,13 @@ export default class Menu extends Component {
     render() {
         return (
             <View style={{ backgroundColor: 'yellow', flex: 1 }}>
-                <TouchableOpacity onPress={this.goToAuthentication.bind()} >
+                <TouchableOpacity onPress={() => this.goToAuthentication()} >
                     <Text>Authentication</Text>
                 </TouchableOpacity>
-                <TouchableOpacity  onPress={this.goToChangeInfo.bind()} >
+                <TouchableOpacity  onPress={() => this.goToChangeInfo()} >
                     <Text>Change Info</Text>
                 </TouchableOpacity>
-                <TouchableOpacity  onPress={this.goToOrderHistory.bind()} >
+                <TouchableOpacity  onPress={() => this.goToOrderHistory()} >
                     <Text>Order History</Text>
                 </TouchableOpacity>
             </View>

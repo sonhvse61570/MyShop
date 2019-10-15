@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, Dimensions, TouchableOpacity, Image } from 'react-native';
 import Cart from './Cart/Cart';
 import Search from './Search/Search';
 import Home from './Home/Home';
 import Contact from './Contact/Contact';
+import Header from './Header';
 import TabNavigator from 'react-native-tab-navigator';
 
 const { height } = Dimensions.get('window');
@@ -24,11 +25,7 @@ export default class Shop extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <View style={{ height: height / 15 }}>
-                    <TouchableOpacity onPress={() => this.openMenu()}>
-                        <Text>Topbar</Text>
-                    </TouchableOpacity>
-                </View>
+                <Header onOpen={this.openMenu.bind(this)} />
                 <TabNavigator>
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'home'}
