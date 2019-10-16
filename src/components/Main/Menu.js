@@ -3,6 +3,12 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import profileIcon from '../../../images/profile.png';
 
 export default class Menu extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isLogin: false,
+        };
+    }
     goToAuthentication() {
         const { navigator } = this.props;
         navigator.push({ name: "AUTHENTICATION" });
@@ -16,15 +22,35 @@ export default class Menu extends Component {
         navigator.push({ name: "ORDER_HISTORY" });
     }
     render() {
-        const { container, profile, btnStyle, btnText } = styles;
+        const { container, profile, btnStyle, btnText, btnSignInStyle, btnContainer, username } = styles;
+        const logoutJSX = (
+            <View>
+                <TouchableOpacity style={btnStyle} onPress={this.goToAuthentication.bind(this)}>
+                    <Text style={btnText}>Sign In</Text>
+                </TouchableOpacity>
+            </View>
+        );
+        const loginJSX = (
+            <View>
+                <Text style={username}>Son Hoang</Text>
+                <View style={btnContainer}>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.goToOrderHistory.bind(this)}>
+                        <Text style={btnText}>Order History</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.goToChangeInfo.bind(this)}>
+                        <Text style={btnText}>Change Info</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={btnSignInStyle}>
+                        <Text style={btnText}>Sign Out</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        );
+        const mainJSX = this.state.isLogin ? loginJSX : logoutJSX; 
         return (
             <View style={container}>
                 <Image source={profileIcon} style={profile} />
-                <View>
-                    <TouchableOpacity style={btnStyle}>
-                        <Text style={btnText}>Sign In</Text>
-                    </TouchableOpacity>
-                </View>
+                { mainJSX }
             </View>
         );
     }
@@ -37,12 +63,14 @@ const styles = StyleSheet.create({
         borderRightWidth: 3,
         borderRightColor: '#ECE3E3',
         alignItems: 'center',
+        flex: 1,
     },
     profile: {
-        width: 150,
-        height: 150,
+        width: 120,
+        height: 120,
         borderRadius: 75,
         marginBottom: 20,
+        marginVertical: 20,
     },
     btnStyle: {
         height: 60,
@@ -52,7 +80,26 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 70,
     },
+    btnSignInStyle: {
+        height: 60,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        width: 200,
+        marginBottom: 10,
+    },
     btnText: {
         color: '#63C491',
+        fontSize: 20,
+    },
+    btnContainer: {
+        flex:1,
+        marginTop: 40,
+    },
+    username: {
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 20,
     },
 })
