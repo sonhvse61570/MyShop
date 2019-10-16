@@ -26,9 +26,9 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
     wrapper: {
         height: height / 7, 
-        backgroundColor: '#EA7171',
+        backgroundColor: '#63C491',
         padding: 8,
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
     },
     row1: {
         flexDirection: 'row', 
@@ -36,14 +36,15 @@ const styles = StyleSheet.create({
     },
     textInput: {
         backgroundColor: 'white',
-        height: height / 15
+        height: height / 15,
+        padding: 5,
     },
     iconStyle: {
         width: 25,
-        height: 25
+        height: 25,
     },
     titleStyle: {
         color: 'white',
-        fontSize: 20
+        fontSize: 20,
     },
 })
