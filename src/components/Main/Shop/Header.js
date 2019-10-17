@@ -16,7 +16,7 @@ export default class Header extends Component {
                     <Text style={styles.titleStyle}>Leng Keng</Text>
                     <Image source={icLogo} style={styles.iconStyle} />
                 </View>
-                <TextInput style={styles.textInput} placeholder='Search' />
+                <TextInput underlineColorAndroid='transparent' style={styles.textInput} placeholder='Search' />
             </View>
         );
     }

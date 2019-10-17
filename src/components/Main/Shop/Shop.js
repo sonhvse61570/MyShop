@@ -52,7 +52,7 @@ export default class Shop extends Component {
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'search'}
                         renderIcon={() => <Image source={icSearch} />}
-                        renderSelectedIcon={() => <Image source={icSelectedContact} />}
+                        renderSelectedIcon={() => <Image source={icSelectedSearch} />}
                         onPress={() => this.setState({ selectedTab: 'search' })}>
                         {<Search />}
                     </TabNavigator.Item>
