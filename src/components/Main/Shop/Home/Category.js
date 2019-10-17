@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 
 import littleIcon from '../../../../media/images/little.jpg';
@@ -9,6 +9,10 @@ import partyIcon from '../../../../media/images/party.jpg';
 const { width, height } = Dimensions.get('window');
 
 export default class Category extends Component {
+    goToListProduct(){
+        const { navigator } = this.props;
+        navigator.push({ name: "LIST_PRODUCT" });
+    }
     render() {
         const {wrapper} = styles;
 
@@ -19,9 +23,15 @@ export default class Category extends Component {
                 </View>
                 <View style={styles.bannerStyle}>
                     <Swiper>
-                        <Image style={styles.imageStyle} source={littleIcon} />
-                        <Image style={styles.imageStyle} source={maxiIcon} />
-                        <Image style={styles.imageStyle} source={partyIcon} />
+                        <TouchableOpacity onPress={() => this.goToListProduct()}>
+                            <Image style={styles.imageStyle} source={littleIcon} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.goToListProduct()}>
+                            <Image style={styles.imageStyle} source={maxiIcon} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.goToListProduct()}>
+                            <Image style={styles.imageStyle} source={partyIcon} />
+                        </TouchableOpacity>
                     </Swiper>
                 </View>
             </View>

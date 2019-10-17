@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 
 import sp1 from '../../../../media/images/sp1.jpeg';
 import sp2 from '../../../../media/images/sp2.jpeg';
@@ -8,6 +8,10 @@ import sp4 from '../../../../media/images/sp4.jpeg';
 import sp5 from '../../../../media/images/sp5.jpeg';
 
 export default class TopProduct extends Component {
+    goToProductDetail(){
+        const { navigator } = this.props;
+        navigator.push({ name: "PRODUCT_DETAIL" })
+    }
     render() {
         const { container, titleContainer, body, title, productContainer, productImage, productName, productPrice } = styles;
         return (
@@ -16,26 +20,31 @@ export default class TopProduct extends Component {
                     <Text style={title}>TOP PRODUCT</Text>
                 </View>
                 <View style={body}>
-                    <View style={productContainer}>
+                    <TouchableOpacity style={productContainer} onPress={() => this.goToProductDetail()} >
                         <Image  source={sp1} style={productImage} />
                         <Text style={productName}>Name</Text>
                         <Text style={productPrice}>25$</Text>
-                    </View>
-                    <View style={productContainer}>
-                        <Image  source={sp1} style={productImage} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={productContainer} onPress={() => this.goToProductDetail()} >
+                        <Image  source={sp2} style={productImage} />
                         <Text style={productName}>Name</Text>
                         <Text style={productPrice}>25$</Text>
-                    </View>
-                    <View style={productContainer}>
-                        <Image  source={sp1} style={productImage} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={productContainer} onPress={() => this.goToProductDetail()} >
+                        <Image  source={sp3} style={productImage} />
                         <Text style={productName}>Name</Text>
                         <Text style={productPrice}>25$</Text>
-                    </View>
-                    <View style={productContainer}>
-                        <Image  source={sp1} style={productImage} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={productContainer} onPress={() => this.goToProductDetail()} >
+                        <Image  source={sp4} style={productImage} />
                         <Text style={productName}>Name</Text>
                         <Text style={productPrice}>25$</Text>
-                    </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={productContainer} onPress={() => this.goToProductDetail()} >
+                        <Image  source={sp5} style={productImage} />
+                        <Text style={productName}>Name</Text>
+                        <Text style={productPrice}>25$</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
@@ -64,7 +73,7 @@ const styles = StyleSheet.create({
     },
     body: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         flexWrap: 'wrap',
         paddingBottom: 10,
     },

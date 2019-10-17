@@ -13,7 +13,7 @@ export default class Header extends Component {
                     <TouchableOpacity onPress={this.props.onOpen} >
                         <Image source={icMenu} style={styles.iconStyle} />
                     </TouchableOpacity>
-                    <Text style={styles.titleStyle}>Lazada</Text>
+                    <Text style={styles.titleStyle}>Leng Keng</Text>
                     <Image source={icLogo} style={styles.iconStyle} />
                 </View>
                 <TextInput style={styles.textInput} placeholder='Search' />
@@ -33,11 +33,13 @@ const styles = StyleSheet.create({
     row1: {
         flexDirection: 'row', 
         justifyContent: 'space-between', 
+        alignItems: 'center',
     },
     textInput: {
         backgroundColor: 'white',
         height: height / 15,
         padding: 5,
+        marginTop: 10,
     },
     iconStyle: {
         width: 25,
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
     },
     titleStyle: {
         color: 'white',
-        fontSize: 20,
+        fontSize: 25,
+        fontWeight: 'bold',
     },
 })
