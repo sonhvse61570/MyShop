@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     product: {
         flexDirection: 'row',
         margin: 10,
+        marginBottom: 5,
         padding: 10,
         backgroundColor: '#FFFFFF',
         borderRadius: 2,

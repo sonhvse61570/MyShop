@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 
-import littleIcon from '../../../../media/images/little.jpg';
-import maxiIcon from '../../../../media/images/maxi.jpg';
-import partyIcon from '../../../../media/images/party.jpg';
-
 const { width, height } = Dimensions.get('window');
+const url = 'http://192.168.0.199/app/images/type/';
 
 export default class Category extends Component {
     goToListProduct(){
@@ -15,7 +12,7 @@ export default class Category extends Component {
     }
     render() {
         const {wrapper} = styles;
-
+        const { types } = this.props;
         return (
             <View style={wrapper}>
                 <View style={styles.titleStyle}>
@@ -23,15 +20,13 @@ export default class Category extends Component {
                 </View>
                 <View style={styles.bannerStyle}>
                     <Swiper>
-                        <TouchableOpacity onPress={() => this.goToListProduct()}>
-                            <Image style={styles.imageStyle} source={littleIcon} />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.goToListProduct()}>
-                            <Image style={styles.imageStyle} source={maxiIcon} />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.goToListProduct()}>
-                            <Image style={styles.imageStyle} source={partyIcon} />
-                        </TouchableOpacity>
+                        {
+                            types.map(e => (
+                                <TouchableOpacity onPress={() => this.goToListProduct()} key={e.id} >
+                                    <Image style={styles.imageStyle} source={{ uri: `${url}${e.image}` }} />
+                                </TouchableOpacity>
+                            ))
+                        }
                     </Swiper>
                 </View>
             </View>

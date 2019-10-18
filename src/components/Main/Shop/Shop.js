@@ -5,6 +5,7 @@ import Search from './Search/Search';
 import Home from './Home/Home';
 import Contact from './Contact/Contact';
 import Header from './Header';
+import global from '../../global';
 import TabNavigator from 'react-native-tab-navigator';
 import icHome from '../../../../images/blackhome.png';
 import icSelectedHome from '../../../../images/greenhome.png';
@@ -22,7 +23,29 @@ export default class Shop extends Component {
         super(props);
         this.state = {
             selectedTab: 'home',
-        }
+            types: [],
+            topProducts: [],
+            cartArray: [],
+        };
+        global.addProductToCart = this.addProductToCart.bind(this);
+    }
+
+    componentDidMount() {
+        fetch('http://192.168.0.199/app/')
+        .then(res => res.json())
+        .then(resJson => {
+            const { type, product } = resJson;
+            this.setState({
+                types: type,
+                topProducts: product,
+            })
+        });
+    }
+
+    addProductToCart(product) {
+        this.setState({
+            cartArray: this.state.cartArray.concat(product),
+        });
     }
 
     openMenu() {
@@ -31,26 +54,27 @@ export default class Shop extends Component {
     }
 
     render() {
+        const { selectedTab, types, topProducts, cartArray } = this.state;
         return (
             <View style={{ flex: 1 }}>
                 <Header onOpen={this.openMenu.bind(this)} />
                 <TabNavigator>
                     <TabNavigator.Item
-                        selected={this.state.selectedTab === 'home'}
+                        selected={selectedTab === 'home'}
                         renderIcon={() => <Image source={icHome} />}
                         renderSelectedIcon={() => <Image source={icSelectedHome} />}
                         onPress={() => this.setState({ selectedTab: 'home' })}>
-                        {<Home />}
+                        {<Home types={types} topProducts={topProducts} />}
                     </TabNavigator.Item>
                     <TabNavigator.Item
-                        selected={this.state.selectedTab === 'contact'}
+                        selected={selectedTab === 'contact'}
                         renderIcon={() => <Image source={icContact} />}
                         renderSelectedIcon={() => <Image source={icSelectedContact} />}
                         onPress={() => this.setState({ selectedTab: 'contact' })}>
                         {<Contact />}
                     </TabNavigator.Item>
                     <TabNavigator.Item
-                        selected={this.state.selectedTab === 'search'}
+                        selected={selectedTab === 'search'}
                         renderIcon={() => <Image source={icSearch} />}
                         renderSelectedIcon={() => <Image source={icSelectedSearch} />}
                         onPress={() => this.setState({ selectedTab: 'search' })}>
@@ -58,11 +82,12 @@ export default class Shop extends Component {
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         badgeText="1"
-                        selected={this.state.selectedTab === 'cart'}
+                        selected={selectedTab === 'cart'}
+                        badgeText={cartArray.length}
                         renderIcon={() => <Image source={icCart} />}
                         renderSelectedIcon={() => <Image source={icSelectedCart} />}
                         onPress={() => this.setState({ selectedTab: 'cart' })}>
-                        {<Cart />}
+                        {<Cart cartArray={cartArray}/>}
                     </TabNavigator.Item>
                 </TabNavigator>
             </View>
