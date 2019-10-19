@@ -6,6 +6,9 @@ import Home from './Home/Home';
 import Contact from './Contact/Contact';
 import Header from './Header';
 import global from '../../global';
+import initData from '../../../api/initData';
+import saveCart from '../../../api/saveCart';
+import getCart from '../../../api/getCart';
 import TabNavigator from 'react-native-tab-navigator';
 import icHome from '../../../../images/blackhome.png';
 import icSelectedHome from '../../../../images/greenhome.png';
@@ -31,8 +34,7 @@ export default class Shop extends Component {
     }
 
     componentDidMount() {
-        fetch('http://192.168.0.199/app/')
-        .then(res => res.json())
+        initData()
         .then(resJson => {
             const { type, product } = resJson;
             this.setState({
@@ -40,12 +42,17 @@ export default class Shop extends Component {
                 topProducts: product,
             })
         });
+
+        getCart()
+        .then(cartArray => this.setState({
+            cartArray: cartArray,
+        }))
     }
 
     addProductToCart(product) {
         this.setState({
             cartArray: this.state.cartArray.concat({ product : product, quantity: 1}),
-        });
+        }, () => saveCart(this.state.cartArray));
     }
 
     openMenu() {
