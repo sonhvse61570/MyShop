@@ -15,6 +15,12 @@ export default class CartView extends Component {
     increaseQuantity(productId){
         global.increaseQuantity(productId);
     }
+    descreaseQuantity(productId){
+        global.descreaseQuantity(productId);
+    }
+    removeProduct(productId){
+        global.removeProduct(productId);
+    }
     gotoDetail() {
         const { navigator } = this.props;
         navigator.push({ name: 'PRODUCT_DETAIL' });
@@ -39,7 +45,7 @@ export default class CartView extends Component {
                         <View style={[mainRight]}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                                 <Text style={txtName}>{toTitleCase(cartItem.product.name)}</Text>
-                                <TouchableOpacity>
+                                <TouchableOpacity style={{ height: 20, width: 20 }} onPress={() => this.removeProduct(cartItem.product.id)}>
                                     <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
                                 </TouchableOpacity>
                             </View>
@@ -48,11 +54,11 @@ export default class CartView extends Component {
                             </View>
                             <View style={productController}>
                                 <View style={numberOfProduct}>
-                                    <TouchableOpacity onPress={() => this.increaseQuantity(cartItem.product.id)}>
+                                    <TouchableOpacity style={{ height: 20, width: 20 }} onPress={() => this.increaseQuantity(cartItem.product.id)}>
                                         <Text>+</Text>
                                     </TouchableOpacity>
                                     <Text>{cartItem.quantity}</Text>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity style={{ height: 20, width: 20 }} onPress={() => this.descreaseQuantity(cartItem.product.id)}>
                                         <Text>-</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -65,7 +71,7 @@ export default class CartView extends Component {
                     )}
                 />
                 <TouchableOpacity style={checkoutButton}>
-                    <Text style={checkoutTitle}>TOTAL {1000}$ CHECKOUT NOW</Text>
+                    <Text style={checkoutTitle}>TOTAL {cartArray.map(e => e.product.price * e.quantity).reduce((prev, curr) => prev + curr, 0)}$ CHECKOUT NOW</Text>
                 </TouchableOpacity>
             </View>
         );

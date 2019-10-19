@@ -33,6 +33,7 @@ export default class Shop extends Component {
         global.addProductToCart = this.addProductToCart.bind(this);
         global.increaseQuantity = this.increaseQuantity.bind(this);
         global.descreaseQuantity = this.descreaseQuantity.bind(this);
+        global.removeProduct = this.removeProduct.bind(this);
     }
 
     componentDidMount() {
@@ -52,8 +53,17 @@ export default class Shop extends Component {
     }
 
     addProductToCart(product) {
+        var index = this.state.cartArray.findIndex(e => e.product.id === product.id);
+        var newCart;
+        if (index < 0) {
+            newCart = this.state.cartArray.concat({ product : product, quantity: 1});
+        } else {
+            newCart = this.state.cartArray;
+            newCart[index].quantity = newCart[index].quantity + 1;
+        }
+
         this.setState({
-            cartArray: this.state.cartArray.concat({ product : product, quantity: 1}),
+            cartArray: newCart,
         }, () => saveCart(this.state.cartArray));
     }
 
@@ -72,6 +82,13 @@ export default class Shop extends Component {
             if(e.product.id !== productId) return e;
             return {product: e.product, quantity: e.quantity - 1};
         });
+        this.setState({
+            cartArray: newCart,
+        }, () => saveCart(this.state.cartArray));
+    }
+
+    removeProduct(productId){
+        const newCart = this.state.cartArray.filter(e => e.product.id !== productId);
         this.setState({
             cartArray: newCart,
         }, () => saveCart(this.state.cartArray));
@@ -112,7 +129,7 @@ export default class Shop extends Component {
                     <TabNavigator.Item
                         badgeText="1"
                         selected={selectedTab === 'cart'}
-                        badgeText={cartArray.length}
+                        badgeText={cartArray.map(e => e.quantity).reduce((prev, curr) => prev + curr, 0)}
                         renderIcon={() => <Image source={icCart} />}
                         renderSelectedIcon={() => <Image source={icSelectedCart} />}
                         onPress={() => this.setState({ selectedTab: 'cart' })}>
