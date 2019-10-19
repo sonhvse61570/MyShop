@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { 
-    View, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity 
+    View, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity, ListView
 } from 'react-native';
 import global from '../../../global';
 
@@ -37,10 +37,15 @@ export default class ProductDetail extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={imageContainer}>
-                        <ScrollView style={{ flexDirection: 'row', padding: 10, height: swiperHeight }} horizontal >
-                            <Image source={{ uri: `${url}${product.images[0]}` }} style={productImageStyle} />
-                            <Image source={{ uri: `${url}${product.images[1]}` }} style={productImageStyle} />
-                        </ScrollView>
+                        <ListView 
+                            contentContainerStyle={{flexDirection: 'row', padding: 10}}
+                            horizontal={true}
+                            enableEmptySections
+                            dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 }).cloneWithRows(product.images)}
+                            renderRow={(productImage) => (
+                                <Image source={{ uri: `${url}${productImage}` }} style={productImageStyle} />
+                            )}
+                        />
                     </View>
                     <View style={footer}>
                         <View style={titleContainer}>

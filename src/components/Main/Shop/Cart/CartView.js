@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 
 import sp1 from '../../../../media/images/sp1.jpeg';
+const url = 'http://192.168.0.199/app/images/product/';
 
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -31,23 +32,23 @@ export default class CartView extends Component {
                     dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(cartArray)}
                     renderRow={cartItem => (
                         <View style={product}>
-                        <Image source={sp1} style={productImage} />
+                        <Image source={{ uri: `${url}${cartItem.product.images[0]}` }} style={productImage} />
                         <View style={[mainRight]}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={txtName}>{toTitleCase('black of the')}</Text>
+                                <Text style={txtName}>{toTitleCase(cartItem.product.name)}</Text>
                                 <TouchableOpacity>
                                     <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
                                 </TouchableOpacity>
                             </View>
                             <View>
-                                <Text style={txtPrice}>{100}$</Text>
+                                <Text style={txtPrice}>{cartItem.product.price}$</Text>
                             </View>
                             <View style={productController}>
                                 <View style={numberOfProduct}>
                                     <TouchableOpacity>
                                         <Text>+</Text>
                                     </TouchableOpacity>
-                                    <Text>{3}</Text>
+                                    <Text>{cartItem.quantity}</Text>
                                     <TouchableOpacity>
                                         <Text>-</Text>
                                     </TouchableOpacity>

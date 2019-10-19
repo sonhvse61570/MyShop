@@ -44,7 +44,7 @@ export default class Shop extends Component {
 
     addProductToCart(product) {
         this.setState({
-            cartArray: this.state.cartArray.concat(product),
+            cartArray: this.state.cartArray.concat({ product : product, quantity: 1}),
         });
     }
 
