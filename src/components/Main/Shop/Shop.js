@@ -31,6 +31,8 @@ export default class Shop extends Component {
             cartArray: [],
         };
         global.addProductToCart = this.addProductToCart.bind(this);
+        global.increaseQuantity = this.increaseQuantity.bind(this);
+        global.descreaseQuantity = this.descreaseQuantity.bind(this);
     }
 
     componentDidMount() {
@@ -52,6 +54,26 @@ export default class Shop extends Component {
     addProductToCart(product) {
         this.setState({
             cartArray: this.state.cartArray.concat({ product : product, quantity: 1}),
+        }, () => saveCart(this.state.cartArray));
+    }
+
+    increaseQuantity(productId){
+        const newCart = this.state.cartArray.map(e => {
+            if(e.product.id !== productId) return e;
+            return {product: e.product, quantity: e.quantity + 1};
+        });
+        this.setState({
+            cartArray: newCart,
+        }, () => saveCart(this.state.cartArray));
+    }
+
+    descreaseQuantity(productId){
+        const newCart = this.state.cartArray.map(e => {
+            if(e.product.id !== productId) return e;
+            return {product: e.product, quantity: e.quantity - 1};
+        });
+        this.setState({
+            cartArray: newCart,
         }, () => saveCart(this.state.cartArray));
     }
 
