@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
+import register from '../../api/register';
 import icBack from '../../../images/back_white.png';
 import icLogo from '../../../images/logo.png';
 
@@ -30,57 +33,10 @@ export default class Authentication extends Component {
 
   render() {
     const { 
-      container, headerContainer, imageStyle, brandStyle, bodyContainer, footerContainer, textInputStyle 
-      , btnSubmit, btnTitleSubmit, activedColor, inactivedColor, btnSignIn, btnSignUp, horizontalRule
+      container, headerContainer, imageStyle, brandStyle, footerContainer 
+      , activedColor, inactivedColor, btnSignIn, btnSignUp, horizontalRule
     } = styles;
-    const signInLayoutJSX = (
-      <View style={bodyContainer}>
-        <TextInput 
-          placeholder='Enter your email' 
-          underlineColorAndroid='transparent' 
-          style={textInputStyle} 
-        />
-        <TextInput 
-          secureTextEntry 
-          placeholder='Enter your password' 
-          underlineColorAndroid='transparent' 
-          style={textInputStyle} 
-        />
-        <TouchableOpacity style={btnSubmit}>
-          <Text style={btnTitleSubmit}>SIGN IN NOW</Text>
-        </TouchableOpacity>
-      </View>
-    );
-    const signUpLayoutJSX = (
-      <View style={bodyContainer}>
-        <TextInput 
-          placeholder='Enter your name' 
-          underlineColorAndroid='transparent' 
-          style={textInputStyle} 
-        />
-        <TextInput 
-          placeholder='Enter your email' 
-          underlineColorAndroid='transparent' 
-          style={textInputStyle} 
-        />
-        <TextInput 
-          secureTextEntry 
-          placeholder='Enter your password' 
-          underlineColorAndroid='transparent' 
-          style={textInputStyle} 
-        />
-        <TextInput 
-          secureTextEntry 
-          placeholder='Re-enter your password' 
-          underlineColorAndroid='transparent' 
-          style={textInputStyle} 
-        />
-        <TouchableOpacity style={btnSubmit}>
-          <Text style={btnTitleSubmit}>SIGN UP NOW</Text>
-        </TouchableOpacity>
-      </View>
-    );
-    const bodyLayoutJSX = this.state.isSignIn ? signInLayoutJSX : signUpLayoutJSX;
+    const bodyLayoutJSX = this.state.isSignIn ? <SignIn /> : <SignUp />;
 
     return (
       <View style={container}>
