@@ -25,7 +25,7 @@ export default class SignIn extends Component {
             'Register',
             'You have successfully registered',
             [
-              {text: 'OK', onPress: () => console.log('success')},
+              {text: 'OK', onPress: () => this.props.signIn()},
             ],
             {cancelable: false},
           );

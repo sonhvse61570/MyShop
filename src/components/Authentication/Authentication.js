@@ -36,7 +36,7 @@ export default class Authentication extends Component {
       container, headerContainer, imageStyle, brandStyle, footerContainer 
       , activedColor, inactivedColor, btnSignIn, btnSignUp, horizontalRule
     } = styles;
-    const bodyLayoutJSX = this.state.isSignIn ? <SignIn /> : <SignUp />;
+    const bodyLayoutJSX = this.state.isSignIn ? <SignIn backToMain={this.goBackToMain.bind(this)} /> : <SignUp signIn={this.signIn.bind(this)} />;
 
     return (
       <View style={container}>

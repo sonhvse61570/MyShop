@@ -1,5 +1,6 @@
 const register = (email, name, password) => (
-    fetch('http://192.168.0.199/app/register.php', {
+    // 192.168.0.199
+    fetch('http://172.16.1.19/app/register.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -3,8 +3,27 @@ import { View } from 'react-native';
 import Menu from './Menu';
 import Shop from './Shop/Shop';
 import Drawer from 'react-native-drawer';
+import checkLogin from '../../api/checkLogin';
+import getToken from '../../api/getToken';
+import saveToken from '../../api/saveToken';
+import global from '../global';
+import refreshToken from '../../api/resfreshToken';
 
 export default class Main extends Component {
+  componentDidMount(){
+    getToken()
+    .then(token => checkLogin(token))
+    .then(resJson => global.login(resJson.user))
+    .catch(error => { 
+      console.log(error);
+      saveToken('');
+    });
+
+    setInterval(() => {
+      getToken()
+      .then(token => refreshToken(token))
+    }, 60 * 1000)
+  }
   goToAuthentication() {
     const { navigator } = this.props;
     navigator.push({ name: "AUTHENTICATION" });

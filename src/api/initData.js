@@ -1,5 +1,5 @@
 const initData = () => (
-    fetch('http://192.168.0.199/app/')
+    fetch('http://172.16.1.19/app/') // 192.168.0.199
     .then(res => res.json())
 );
 
