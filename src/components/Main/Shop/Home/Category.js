@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
+import host from '../../../../api/host';
 
 const { width, height } = Dimensions.get('window');
-const url = 'http://192.168.0.199/app/images/type/';
+const url = `${host}images/type/`;
 
 export default class Category extends Component {
     goToListProduct(){

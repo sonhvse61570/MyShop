@@ -3,10 +3,11 @@ import {
     View, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity, ListView
 } from 'react-native';
 import global from '../../../global';
+import host from '../../../../api/host';
 
+const url = `${host}images/product/`;
 const back = require('../../../../../images/back.png');
 const cart = require('../../../../../images/greencart.png');
-const url = 'http://192.168.0.199/app/images/product/';
 
 export default class ProductDetail extends Component {
     goBack() {

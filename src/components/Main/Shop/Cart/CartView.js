@@ -4,8 +4,9 @@ import {
     Dimensions, StyleSheet, Image, ListView
 } from 'react-native';
 import global from '../../../global';
+import host from '../../../../api/host';
 
-const url = 'http://192.168.0.199/app/images/product/';
+const url = `${host}images/product/`;
 
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());

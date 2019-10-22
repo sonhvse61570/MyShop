@@ -1,5 +1,6 @@
+import host from './host';
 const initData = () => (
-    fetch('http://172.16.1.19/app/') // 192.168.0.199
+    fetch(`${host}`)
     .then(res => res.json())
 );
 

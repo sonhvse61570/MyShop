@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, ListView } from 'react-native';
+import host from '../../../../api/host';
 
-const url = 'http://192.168.0.199/app/images/product/';
+const url = `${host}images/product/`;
 
 export default class TopProduct extends Component {
     goToProductDetail(product){

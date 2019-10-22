@@ -1,7 +1,7 @@
 import saveToken from './saveToken';
-
+import host from './host';
 const resfreshToken = (token) => (
-    fetch("http://172.16.1.19/app/refreshToken.php",
+    fetch(`${host}refresh_token.php`,
         {
             method: 'POST',
             headers: {

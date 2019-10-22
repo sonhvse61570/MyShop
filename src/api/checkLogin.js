@@ -1,5 +1,6 @@
+import host from './host';
 const checkLogin = (token) => (
-    fetch('http://172.16.1.19/app/check_login.php',
+    fetch(`${host}check_login.php`,
     {
         method: 'POST',
         headers: {

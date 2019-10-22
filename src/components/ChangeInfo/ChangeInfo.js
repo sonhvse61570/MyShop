@@ -23,7 +23,8 @@ export default class ChangeInfo extends Component {
       getToken()
       .then(token => changeInfo(token, txtName, txtAddress, txtPhone))
       .then((user) => {
-          onSuccess();
+          this.onSuccess();
+          this.goBackToMain();
           global.login(user);
         });
   }
@@ -63,23 +64,22 @@ export default class ChangeInfo extends Component {
                 <TextInput
                     style={textInput}
                     placeholder="Enter your name"
-                    autoCapitalize="none"
                     value={txtName}
-                    onChangeText={text => this.setState({ ...this.state, text })}
+                    onChangeText={(text) =>  this.setState({ txtName: text })}
                 />
                 <TextInput
                     style={textInput}
                     placeholder="Enter your address"
                     autoCapitalize="none"
                     value={txtAddress}
-                    onChangeText={text => this.setState({ ...this.state, text })}
+                    onChangeText={text => this.setState({ txtAddress: text })}
                 />
                 <TextInput
                     style={textInput}
                     placeholder="Enter your phone number"
                     autoCapitalize="none"
-                    value={phone}
-                    onChangeText={text => this.setState({ ...this.state, text })}
+                    value={txtPhone}
+                    onChangeText={text => this.setState({ txtPhone: text })}
                 />
                 <TouchableOpacity style={signInContainer} onPress={this.changeInfo.bind(this)}>
                     <Text style={signInTextStyle}>CHANGE YOUR INFOMATION</Text>

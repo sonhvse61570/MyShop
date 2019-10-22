@@ -1,5 +1,6 @@
+import host from './host';
 const login = (email, password) => (
-    fetch("http://172.16.1.19/app/login.php",
+    fetch(`${host}login.php`,
         {
             method: 'POST',
             headers: {

@@ -1,5 +1,6 @@
+import host from './host';
 const changeInfo = (token, name, address, phone) => (
-    fetch('http://172.16.1.19/app/change_info.php',
+    fetch(`${host}change_info.php`,
     {
         method: 'POST',
         headers: {
